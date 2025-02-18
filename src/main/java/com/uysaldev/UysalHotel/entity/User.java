@@ -1,6 +1,5 @@
 package com.uysaldev.UysalHotel.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -24,12 +23,19 @@ public class User implements UserDetails {
     @NotBlank(message = "Email is required")
     @Column(unique = true)
     private String email;
+
     @NotBlank(message = "Name is required")
     private String name;
+
     @NotBlank(message = "Phone Number is required")
     private String phoneNumber;
+
+    @NotBlank(message = "Password Number is required")
     private String password;
+
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
     @Override
